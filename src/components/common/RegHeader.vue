@@ -1,6 +1,9 @@
 <template>
   <div class='header'>
     <div @click="clickBtn">{{text}}</div>
+    <div class="right">
+      <slot name='right'></slot>
+    </div>
   </div>
 </template>
 
@@ -23,12 +26,20 @@ export default {
   mounted(){},
 }
 </script>
-<style scoped>
+<style scoped lang="scss">
 .header{
+  position: relative;
   line-height: 40px;
   text-align: center;
   background-color: #fff;
   margin-bottom: 20px;
   box-shadow: 1px 1px 5px #888888;
+  .right{
+    position: absolute;
+    right:10px;
+    top:0;
+    font-size: 14px;
+    color: #fb7299;
+  }
 }
 </style>

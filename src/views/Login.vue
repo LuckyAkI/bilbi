@@ -2,19 +2,10 @@
   <div class="reg">
     <!-- 顶部 -->
     <reg-header text="注册bilibili">
-      <div slot="right" @click="$router.push('/login')">切换登录</div>
+      <div slot="right" @click="$router.push('/register')">切换注册</div>
     </reg-header>
 
     <!-- 注册输入框 中文验证：^[\u4E00-\u9FA5\uf900-\ufa2d·s]{2,20}$-->
-    <reg-input
-      style="marginBottom:15px"
-      label="姓名"
-      type="username"
-      placeholder="请输入姓名"
-      rule="^[a-zA-Z\u4e00-\u9fa5]+$"
-      @regvalue="user => this.name = user"
-      @Color="user => this.Color_name = user"
-    />
 
     <reg-input
       label="账号"
@@ -35,10 +26,11 @@
     />
 
     <!-- 注册按钮 -->
-    <reg-botton :color="color" text="注册" @regBtn="regBtn" />
+
+    <reg-botton :color="color" text="登录" @regBtn="regBtn" />
 
     <div class="login">
-      注册即代表你同意
+      登录即代表你同意
       <a href="javascript:;">用户协议</a>和
       <a href="javascript:;">隐私政策</a>
     </div>
@@ -54,13 +46,11 @@ export default {
   name: "Register",
   data() {
     return {
-      name: "",
       username: "",
       password: "",
       color: "#ff9db5",
 
       // 实时获取信息
-      Color_name: "",
       Color_username: "",
       Color_password: ""
     };
@@ -74,7 +64,6 @@ export default {
     ColorLength() {
       let { Color_name, Color_username, Color_password } = this;
       return {
-        Color_name,
         Color_username,
         Color_password
       };
@@ -82,7 +71,7 @@ export default {
   },
   watch: {
     ColorLength(val) {
-      if (val.Color_name && val.Color_username && val.Color_password) {
+      if (val.Color_username && val.Color_password) {
         this.color = "#fb7299";
       }
     }
@@ -90,23 +79,22 @@ export default {
   methods: {
     // 注册请求
     async regBtn() {
-      if (this.name && this.username && this.password) {
-        let res = await this.$http.post("/register", {
+      if (this.username && this.password) {
+        let res = await this.$http.post("/login", {
           username: this.username,
-          password: this.password,
-          name: this.name
+          password: this.password
         });
-
+        console.log(res);
         if (res.data.code == 200) {
-      
+          this.$Toast(res.data.msg);
+          console.log(res)
           localStorage.setItem('id',res.data.id);
           localStorage.setItem('token',res.data.token);
-          this.$Toast(res.data.msg);
+
           setTimeout(() => {
             this.$router.push("/userinfo");
           }, 1000);
         } else {
-          console.log(res);
           this.$Toast.fail(res.data.msg);
         }
       } else {

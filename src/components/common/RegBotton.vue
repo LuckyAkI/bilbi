@@ -37,7 +37,7 @@ export default {
   padding: 10px
 }
 .van-button {
-  border-radius: 5px;
+  border-radius: 50px;
 } 
 
 </style>
