@@ -9,7 +9,7 @@
         <van-icon name="search" />
       </p>
       <!-- <div class="header"> -->
-      <img src="~assets/info_header.jpg" alt />
+      <img :src="mode.user_img" alt />
       <!-- </div> -->
     </div>
 
@@ -20,6 +20,14 @@
 <script>
 export default {
   name: "",
+  props:{
+    mode:{
+      type:Object,
+      default(){
+        return {}
+      }
+    }
+  },
   data() {
     return {};
   },

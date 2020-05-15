@@ -17,7 +17,6 @@ http.interceptors.response.use(config => {
   console.log('响应拦截')
   return config
 },err => {
-  console.dir(Vue.$Toast)
   Vue.prototype.$Toast.fail('用户身份失效')
    router.push('/login')
 })
