@@ -1,6 +1,6 @@
 <template>
   <div class="user">
-    <user-header />
+    <user-header :mode="mode"/>
     <div class="banner_img">
       <img src="~assets/bannerTop_new.png" alt />
     </div>

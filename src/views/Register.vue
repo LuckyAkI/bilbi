@@ -98,9 +98,8 @@ export default {
         });
 
         if (res.data.code == 200) {
-      
+          localStorage.setItem('token',res.data.objtoken);
           localStorage.setItem('id',res.data.id);
-          localStorage.setItem('token',res.data.token);
           this.$Toast(res.data.msg);
           setTimeout(() => {
             this.$router.push("/userinfo");

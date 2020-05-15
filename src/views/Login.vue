@@ -48,6 +48,7 @@ export default {
     return {
       username: "",
       password: "",
+      name:"",
       color: "#ff9db5",
 
       // 实时获取信息
@@ -77,17 +78,16 @@ export default {
     }
   },
   methods: {
-    // 注册请求
+    // 登录请求
     async regBtn() {
       if (this.username && this.password) {
         let res = await this.$http.post("/login", {
           username: this.username,
-          password: this.password
+          password: this.password,
+          name: this.name
         });
-        console.log(res);
         if (res.data.code == 200) {
           this.$Toast(res.data.msg);
-          console.log(res)
           localStorage.setItem('id',res.data.id);
           localStorage.setItem('token',res.data.token);
 
